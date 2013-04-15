@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/themes/default/jquery.mobile-1.3.0.css">
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+        <style>
+        	.text {
+        		font-size: 25px;
+        	}
+        	
+        	h1 {
+        		font-weight: bold;
+        	}
+        </style>
+    </head>
+    <body>
+        <div id="index" data-role="page">
+			<div data-role="header">
+				<div data-role="navbar">
+					<a href="#index" data-role="button" class="ui-btn-active ui-state-persist text">Dashboard</a>
+					<a href="#trade" data-role="button" class="text">Trade</a>
+					<a href="#alarms" data-role="button" class="text">Alarms</a>
+				</div>
+			</div>
+			<div data-role="content">
+				<h1>My Btc-E Account</h1>		
+				<table>
+					<tr>
+						<td class="text">USD</td>
+						<td class="text" id="usd-funds">0.00000000</td>
+					</tr>
+					<tr>
+						<td class="text">BTC</td>
+						<td class="text" id="btc-funds">0.00000000</td>
+					</tr>
+					<tr>
+						<td class="text">LTC</td>
+						<td class="text" id="ltc-funds">0.00000000</td>
+					</tr>
+					<tr>
+						<td class="text">NMC</td>
+						<td class="text" id="nmc-funds">0.00000000</td>
+					</tr>
+					<tr>
+						<td class="text">NVC</td>
+						<td class="text" id="nvc-funds">0.00000000</td>
+					</tr>
+					<tr>
+						<td class="text">TRC</td>
+						<td class="text" id="trc-funds">0.00000000</td>
+					</tr>
+					<tr>
+						<td class="text">PPC</td>
+						<td class="text" id="ppc-funds">0.00000000</td>
+					</tr>
+				</table>
+				<h1>Exchange Rates</h1>
+				<table>
+					<tr>
+						<td class="text">BTC/USD</td>
+						<td class="text" id="btc-usd-ticker">0.00000</td>
+					</tr>
+					<tr>
+						<td class="text">LTC/USD</td>
+						<td class="text" id="ltc-usd-ticker">0.00000</td>
+					</tr>
+					<tr>
+						<td class="text">LTC/BTC</td>
+						<td class="text" id="ltc-btc-ticker">0.00000</td>
+					</tr>
+					<tr>
+						<td class="text">NVC/BTC</td>
+						<td class="text" id="nvc-btc-ticker">0.00000</td>
+					</tr>
+					<tr>
+						<td class="text">TRC/BTC</td>
+						<td class="text" id="trc-btc-ticker">0.00000</td>
+					</tr>
+					<tr>
+						<td class="text">PPC/BTC</td>
+						<td class="text" id="ppc-btc-ticker">0.00000</td>
+					</tr>
+				</table>				
+			</div>
+			<div data-role="footer" class="ui-bar">
+				<a data-role="button" href="#settings" data-transition="flip" data-icon="gear">Settings</a>
+				<a data-role="button" href="#" id="btc-e-link-btn" data-icon="star">Btc-E Site</a>
+				<a data-role="button" href="#" id="about-btn" data-icon="info">About</a>
+			</div>
+		</div>
+		
+		<div id="trade" data-role="page">
+			<div data-role="header">
+				<div data-role="navbar">
+					<a href="#index" data-role="button">Dashboard</a>
+					<a href="#trade" data-role="button" class="ui-btn-active ui-state-persist">Trade</a>
+					<a href="#alarms" data-role="button" class="text">Alarms</a>
+				</div>
+			</div>
+			<div data-role="content">				
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#buy" data-transition="slide" data-role="button">Buy</button>
+					<a href="#" data-role="button">Sell</a>
+				</div>
+				<label for="currency">Currency</label>
+				<select id="currency">
+					<option value="btcusd">BTC/USD</option>
+					<option value="ltcusd">LTC/BTC</option>
+					<option value="ltcusd">LTC/USD</option>
+					<option value="nmcbtc">NMC/BTC</option>
+					<option value="nvcbtc">NVC/BTC</option>
+					<option value="ppcbtc">PPC/BTC</option>
+					<option value="trcbtc">TRC/BTC</option>
+				</select>
+				<label for="trade-type">Trade Type</option>
+				<select id="trade-type">
+					<option value="buyorders">Buy Orders</option>
+					<option value="sellorders">Sell Orders</option>
+				</select>
+				<button id="load-orders-btn">Load</button>
+				<br/>
+				<ul id="orders" data-role="listview"></ul>
+			</div>
+			<div data-role="footer">
+				<a data-role="button" href="#settings" data-transition="flip" data-icon="gear">Settings</a>
+				<a data-role="button" href="#" id="btc-e-link-btn" data-icon="star">Btc-E Site</a>
+			</div>
+		</div>
+		
+		<div id="alarms" data-role="page">
+			<div data-role="header">
+				<div data-role="navbar">
+					<a href="#index" data-role="button">Dashboard</a>
+					<a href="#trade" data-role="button" >Trade</a>
+					<a href="#alarms" data-role="button" class="ui-btn-active ui-state-persist">Alarms</a>
+				</div>
+			</div>
+			<div data-role="content">
+				<a href="#add-alarm" data-transition="flip" data-role="button">Add</a>
+				<br/>
+				<ul id="alarms-list" data-role="listview">
+					<li><a href="#">My Special Alarm</a></li>
+					<li><a href="#">Test Alarm</a></li>
+					<li><a href="#">Another Alarm</a></li>
+				</ul>
+				<br/>
+			</div>
+			<div data-role="footer">
+				<a data-role="button" href="#settings" data-transition="flip" data-icon="gear">Settings</a>
+				<a data-role="button" href="#" id="btc-e-link-btn" data-icon="star">Btc-E Site</a>
+			</div>			
+		</div>
+		
+		<div id="add-alarm" data-role="page">
+			<div data-role="header">
+				<a href="#" data-rel="back" data-role="button" data-icon="delete">Cancel</a>
+				<h1>Create Alarm</h1>
+				<a href="#" id="alarm-save-btn" data-role="button" data-icon="check">Save</a>
+			</div>
+			<div data-role="content">
+				<label for="alarm-name">Name</label>
+				<input type="text" id="alarm-name">
+				<label for="alarm-when">When</label>
+				<select id="alarm-when">
+					<option value="btcusd">BTC/USD</option>
+					<option value="ltcbtc">LTC/BTC</option>
+					<option value="ltcusd">LTC/USD</option>
+				</select>
+				<label for="alarm-is">Is</label>
+				<select id="alarm-is">
+					<option value="above">Above</option>
+					<option value="below">Below</option>
+				</select>
+				<label for="alarm-value">Value</label>
+				<input type="number" data-clear-btn="true" id="alarm-value" pattern="/(?:^\d{1,3}(?:\.?\d{3})*(?:,\d{2})?$)|(?:^\d{1,3}(?:,?\d{3})*(?:\.\d{2})?$)/" value="">
+				<div data-role="controlgroup">					
+					<input type="checkbox" id="alarm-beep">
+					<label for="alarm-beep">Beep</label>					
+					<input type="checkbox" id="alarm-notification">
+					<label for="alarm-notification">Notification</label>
+				</div>
+			</div>
+		</div>
+		
+		<div id="buy" data-role="page" class="ui-corner-all">
+			<div data-role="header">
+				<a href="#" data-role="button" data-rel="back" data-icon="delete">Cancel</a>
+				<h1>Buy</h1>
+			</div>
+			<div data-role="content" class="ui-corner-bottom ui-content">
+				<label for="buying">Buy</label>
+				<select id="buying">
+					<option value="btc">BTC</option>
+					<option value="ltc">LTC</option>
+				</select>
+				<label for="using">Using</label>
+				<select id="using">
+					<option value="usd">USD</option>
+					<option value="rur">RUR</option>
+				</select>
+				Wallet: 44.55
+				<button id="buy-btn">Buy</button>
+			</div>
+		</div>
+		
+		<div id="settings" data-role="page">
+			<div data-role="header">
+				<a href="#index" id="btn-cancel-credentials" data-inline="true" data-icon="delete" data-transition="flip">Cancel</a>
+				<h1>Settings</h1>
+				<button id="btn-save-credentials" data-inline="true" data-icon="check">Save</button>
+			</div>
+			<div data-role="content">
+				<h2>Btc-E Credentials</h2>
+				<div data-role="controlgroup">
+					<label for="key">Key</label>
+					<input type="text" id="key" />
+					<label for="secret">Secret</label>
+					<input type="password" id="secret" />
+					<input type="checkbox" id="enable-notifications">
+					<label for="enable-notifications">Enable Notifications</label>
+				</div>				
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-1.3.0.js"></script>
+        <script type="text/javascript" src="cordova-2.5.0.js"></script>
+		<script type="text/javascript" src="js/hmac-sha512.js"></script>
+		<script type="text/javascript" src="js/android/LocalNotification.js"></script>
+		<script type="text/javascript" src="js/android/WaitingDialog.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+    </body>
+</html>
